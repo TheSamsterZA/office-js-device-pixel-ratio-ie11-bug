@@ -3,12 +3,10 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
+    "setup": "npm install",
+    "start": "npm run serve",
     "ng": "ng",
-    "start": "ng serve",
-    "build": "ng build --prod",
-    "test": "ng test",
-    "lint": "ng lint",
-    "e2e": "ng e2e"
+    "serve": "ng serve --live-reload false --port 3000 --ssl --ssl-key ssl\\development-certificate.key --ssl-cert ssl\\development-certificate.crt"
   },
   "private": true,
   "dependencies": {
