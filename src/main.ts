@@ -4,9 +4,21 @@ import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { AppModule } from './app/app.module';
 import { environment } from './environments/environment';
 
-if (environment.production) {
-  enableProdMode();
-}
+const officeInitPromise = new Promise<boolean>((resolve) => {
+  Office.initialize = () => {
+    console.log(`[INIT] OfficeJS load complete`);
+    resolve(true);
+  };
+});
 
-platformBrowserDynamic().bootstrapModule(AppModule)
-  .catch(err => console.log(err));
+officeInitPromise
+  .then((success) => {
+    if (success) {
+      if (environment.production) {
+        enableProdMode();
+      }
+
+      platformBrowserDynamic().bootstrapModule(AppModule)
+        .catch(err => console.log(err));
+    }
+  });
